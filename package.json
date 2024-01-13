@@ -2,16 +2,15 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "start:user": "cd user && node index",
-    "start:admin": "cd admin && node index",
+    "start:user": "node user/index",
+    "start:admin": "node admin/index",
     "start:both": "npm-run-all --parallel start:user start:admin",
-    "start": "cd user && node index",
+    "start": "npm run start:both",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "abolaji",
   "license": "ISC",
   "dependencies": {
     "axios": "^1.4.0",
