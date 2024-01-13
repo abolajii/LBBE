@@ -7,7 +7,7 @@
     "start:user": "cd user && node index",
     "start:admin": "cd admin && node index",
     "start:both": "npm-run-all --parallel start:user start:admin",
-    "start": "npm run start:user",
+    "start": "cd user && node index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
