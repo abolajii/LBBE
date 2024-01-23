@@ -4,6 +4,7 @@ const cors = require("cors");
 const port = process.env.PORT || 8002;
 const mongoose = require("mongoose");
 const authAdminRoute = require("./routes/auth.routes");
+const { User } = require("../shared/model/User");
 
 const app = express();
 
@@ -37,6 +38,12 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
 app.use("/api/admin", authAdminRoute);
+
+// const deleteUser = async () => {
+//   await User.findOneAndDelete({ email: "aquaderrands@gmail.com" });
+// };
+
+// deleteUser().then((re) => re);
 
 app.listen(port, () => {
   console.log("Server running on port", port);

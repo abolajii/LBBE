@@ -101,4 +101,6 @@ authRoute.get(
   controller.getUserLikesAndFav
 );
 
+authRoute.post("/typing", authMiddleware, controller.getTypingStatus);
+
 module.exports = authRoute;

@@ -1371,6 +1371,20 @@ const getUserLikesAndFav = async (req, res) => {
   }
 };
 
+const getTypingStatus = async (req, res) => {
+  const { id } = req.query;
+
+  const { user } = req.body;
+
+  // const conversation = await Conversation.findById(id).populate("participants");
+
+  await pusher.trigger(id, "message:typing", {
+    sender: user,
+  });
+
+  res.status(200).send("OK");
+};
+
 module.exports = {
   getOtherUser,
   getAllUsers,
@@ -1403,4 +1417,5 @@ module.exports = {
   updatePassword,
   deleteUserPicture,
   getUserLikesAndFav,
+  getTypingStatus,
 };

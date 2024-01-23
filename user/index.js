@@ -55,6 +55,7 @@ app.use(
       // "https://dobb-8c058.web.app",
       "http://127.0.0.1:5173",
       "http://localhost:5173",
+      "http://localhost:5174",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -148,14 +149,19 @@ app.use("/api", signUpRoute);
 app.use("/api", signInRoute);
 app.use("/api", authRoute);
 
-app.use("/pusher/auth", pusherAuth);
+app.post("/api/pusher/auth", pusherAuth);
 
 const resetDb = async () => {
-  const user = await User.findByIdAndDelete("6595d5f8e622fa2e9a82c057");
-  // await Favorite.deleteMany();
-  // await Like.deleteMany();
-  // await Dislike.deleteMany();
-  console.log(user);
+  const user = await User.findOne({ name: "Shade" });
+  user.dob = "Jan 12, 1990";
+
+  await user.save();
+
+  await Conversation.deleteMany();
+  await Message.deleteMany();
+  await Like.deleteMany();
+  await Dislike.deleteMany();
+  await Favorite.deleteMany();
 };
 
 // resetDb()
