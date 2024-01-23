@@ -65,7 +65,7 @@ authRoute.post("/logout", controller.logOut);
 
 authRoute.put("/user", authMiddleware, controller.updateUser);
 
-authRoute.post("/upload/picture", authMiddleware, controller.uploadPicture);
+authRoute.put("/upload/picture", authMiddleware, controller.uploadPicture);
 
 authRoute.post("/session", authMiddleware, controller.sessionCheck);
 

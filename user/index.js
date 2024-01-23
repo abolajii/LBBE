@@ -152,21 +152,21 @@ app.use("/api", authRoute);
 app.post("/api/pusher/auth", pusherAuth);
 
 const resetDb = async () => {
-  const user = await User.findOne({ name: "Shade" });
-  user.dob = "Jan 12, 1990";
+  // const user = await User.findOne({});
+  // user.swipeLimit = 10;
 
-  await user.save();
+  // await user.save();
 
-  await Conversation.deleteMany();
+  // await Conversation.deleteMany();
   await Message.deleteMany();
-  await Like.deleteMany();
-  await Dislike.deleteMany();
-  await Favorite.deleteMany();
+  // await Like.deleteMany();
+  // await Dislike.deleteMany();
+  // await Favorite.deleteMany();
 };
 
-// resetDb()
-//   .then(() => console.log("done"))
-//   .catch((err) => console.log(err));
+resetDb()
+  .then(() => console.log("done"))
+  .catch((err) => console.log(err));
 
 app.listen(port, () => {
   console.log("Server running on port", port);

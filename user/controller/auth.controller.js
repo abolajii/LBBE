@@ -396,7 +396,7 @@ const sendMessage = async (req, res) => {
   const userId = req.user._id;
 
   const conversationId = req.params.conversationId;
-  const { content, senderId } = req.body;
+  const { content, sender, createdAt, seenBy } = req.body;
 
   try {
     // Find the conversation
@@ -406,22 +406,22 @@ const sendMessage = async (req, res) => {
 
     // Check if the sender has blocked the receiver
     const senderBlockedReceiver = await isBlocked(
-      senderId,
-      conversation.participants.find((id) => id._id.toString() !== senderId)._id
+      sender,
+      conversation.participants.find((id) => id._id.toString() !== sender)._id
     );
 
     if (senderBlockedReceiver.senderBlocked) {
       // The sender has blocked the receiver
       return res.status(403).json({
         error: `You blocked ${
-          conversation.participants.find((id) => id._id.toString() !== senderId)
+          conversation.participants.find((id) => id._id.toString() !== sender)
             .name
         }. Message not sent.`,
       });
     } else if (senderBlockedReceiver.receiverBlocked) {
       return res.status(403).json({
         error: `${
-          conversation.participants.find((id) => id._id.toString() !== senderId)
+          conversation.participants.find((id) => id._id.toString() !== sender)
             .name
         } blocked you. Message not sent.`,
       });
@@ -434,9 +434,10 @@ const sendMessage = async (req, res) => {
     // Create a new message
     const newMessage = await new Message({
       conversation: conversationId,
-      sender: senderId,
+      sender,
       content: content,
-      seenBy: [senderId],
+      seenBy,
+      createdAt,
     });
 
     // Save the message
