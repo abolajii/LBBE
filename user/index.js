@@ -165,9 +165,9 @@ const resetDb = async () => {
   // await Favorite.deleteMany();
 };
 
-resetDb()
-  .then(() => console.log("done"))
-  .catch((err) => console.log(err));
+// resetDb()
+//   .then(() => console.log("done"))
+//   .catch((err) => console.log(err));
 
 app.listen(port, () => {
   console.log("Server running on port", port);
